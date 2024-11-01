@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SALAT</title>
+    <title>Кнопка-ссылка на Telegram</title>
     <style>
         body {
             display: flex;
@@ -13,7 +13,7 @@
             background-color: #e0cce4;
             margin: 0;
             font-family: Arial, sans-serif;
-            overflow: hidden;
+            overflow: hidden; /* Предотвращаем выход элементов за границы */
             position: relative;
         }
         .button {
@@ -25,16 +25,15 @@
             font-size: 14px;
             cursor: pointer;
             text-decoration: none;
-            position: absolute;
+            position: absolute; /* Позволяет кнопке двигаться по всему экрану */
         }
         .counter {
-            position: fixed; /* Используем фиксированное позиционирование */
-            bottom: 10px;
+            position: absolute; /* Оставляем абсолютное позиционирование */
+            bottom: 10px; /* Расположение счётчика снизу */
             left: 50%; /* Центрируем по горизонтали */
             transform: translateX(-50%); /* Смещение для центрирования */
             font-size: 18px;
             color: #333;
-            z-index: 1; /* Обеспечиваем, чтобы элемент был выше других */
         }
         .note {
             position: absolute;
