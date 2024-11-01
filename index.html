@@ -67,6 +67,13 @@
         }, 100); // Время, через которое фон возвращается обратно (сейчас 100 мс)
     }
 
+    function vibrate() {
+        // Проверяем, поддерживает ли устройство вибрацию
+        if ("vibrate" in navigator) {
+            navigator.vibrate(100); // Вибрация на 100 мс
+        }
+    }
+
     function moveButton() {
         posX += velocityX;
         posY += velocityY;
@@ -76,17 +83,13 @@
             velocityX = -velocityX;
             bounceCount++;
             flashBackground(); // Вызов функции мерцания фона
-
-            // Обеспечиваем, чтобы кнопка не застревала
-            posX = Math.max(0, Math.min(posX, window.innerWidth - button.offsetWidth));
+            vibrate(); // Вызов вибрации
         }
         if (posY <= 0 || posY >= window.innerHeight - button.offsetHeight) {
             velocityY = -velocityY;
             bounceCount++;
             flashBackground(); // Вызов функции мерцания фона
-
-            // Обеспечиваем, чтобы кнопка не застревала
-            posY = Math.max(0, Math.min(posY, window.innerHeight - button.offsetHeight));
+            vibrate(); // Вызов вибрации
         }
 
         // Обновляем позицию кнопки
