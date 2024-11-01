@@ -15,6 +15,7 @@
             font-family: Arial, sans-serif;
             overflow: hidden; /* Предотвращаем выход элементов за границы */
             position: relative;
+            transition: background-color 0.1s; /* Плавный переход цвета фона */
         }
         .button {
             background-color: #2e8b57;
@@ -26,15 +27,6 @@
             cursor: pointer;
             text-decoration: none;
             position: absolute; /* Позволяет кнопке двигаться по всему экрану */
-            transition: background-color 0.1s; /* Ускоренный переход цвета фона */
-        }
-        .button.bounce {
-            animation: bounce 0.3s; /* Укороченная анимация при столкновении */
-        }
-        @keyframes bounce {
-            0% { background-color: #2e8b57; }
-            50% { background-color: #ffcc00; } /* Цвет при столкновении */
-            100% { background-color: #2e8b57; }
         }
         .counter {
             position: absolute; /* Оставляем абсолютное позиционирование */
@@ -68,10 +60,11 @@
     let velocityX = 2 + Math.random() * 3; 
     let velocityY = 2 + Math.random() * 3; 
 
-    function vibrate() {
-        if ("vibrate" in navigator) { // Проверка на поддержку API вибрации
-            navigator.vibrate(100); // Вибрация на 100 миллисекунд
-        }
+    function flashBackground() {
+        document.body.style.backgroundColor = '#ffffff'; // Смена фона на белый
+        setTimeout(() => {
+            document.body.style.backgroundColor = '#e0cce4'; // Возврат фона обратно
+        }, 100); // Время, через которое фон возвращается обратно (сейчас 100 мс)
     }
 
     function moveButton() {
@@ -82,16 +75,12 @@
         if (posX <= 0 || posX >= window.innerWidth - button.offsetWidth) {
             velocityX = -velocityX;
             bounceCount++;
-            button.classList.add("bounce"); // Добавляем класс для анимации
-            vibrate(); // Вызываем вибрацию
-            setTimeout(() => button.classList.remove("bounce"), 300); // Удаляем класс после 300 мс
+            flashBackground(); // Вызов функции мерцания фона
         }
         if (posY <= 0 || posY >= window.innerHeight - button.offsetHeight) {
             velocityY = -velocityY;
             bounceCount++;
-            button.classList.add("bounce"); // Добавляем класс для анимации
-            vibrate(); // Вызываем вибрацию
-            setTimeout(() => button.classList.remove("bounce"), 300); // Удаляем класс после 300 мс
+            flashBackground(); // Вызов функции мерцания фона
         }
 
         // Обновляем позицию кнопки
