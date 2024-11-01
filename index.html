@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Button Link to Telegram</title>
+    <title>SALAT</title>
     <style>
         body {
             display: flex;
@@ -13,7 +13,7 @@
             background-color: #e0cce4;
             margin: 0;
             font-family: Arial, sans-serif;
-            overflow: hidden; /* чтобы кнопка не выходила за границы */
+            overflow: hidden;
             position: relative;
         }
         .button {
@@ -25,19 +25,22 @@
             font-size: 14px;
             cursor: pointer;
             text-decoration: none;
-            position: absolute; /* позволяет кнопке двигаться по всему экрану */
+            position: absolute;
         }
         .counter {
-            position: absolute;
+            position: fixed; /* Используем фиксированное позиционирование */
             bottom: 10px;
+            left: 50%; /* Центрируем по горизонтали */
+            transform: translateX(-50%); /* Смещение для центрирования */
             font-size: 18px;
             color: #333;
+            z-index: 1; /* Обеспечиваем, чтобы элемент был выше других */
         }
         .note {
             position: absolute;
             top: 10px;
             font-size: 12px;
-            color: rgba(0, 0, 0, 0.3); /* полупрозрачный текст */
+            color: rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -54,8 +57,8 @@
     let bounceCount = 0;
     let posX = Math.random() * window.innerWidth;
     let posY = Math.random() * window.innerHeight;
-    let velocityX = 2 + Math.random() * 3; // случайная начальная скорость по X
-    let velocityY = 2 + Math.random() * 3; // случайная начальная скорость по Y
+    let velocityX = 2 + Math.random() * 3; 
+    let velocityY = 2 + Math.random() * 3; 
 
     function moveButton() {
         posX += velocityX;
@@ -82,13 +85,13 @@
     }
 
     button.addEventListener("click", (event) => {
-        event.preventDefault(); // предотвращаем переход по ссылке сразу
+        event.preventDefault(); 
         clickCount++;
 
         if (clickCount === 1) {
-            moveButton(); // запускаем анимацию при первом клике
+            moveButton(); 
         } else if (clickCount === 2) {
-            window.open(button.href, "_blank"); // при втором нажатии переходим на ссылку
+            window.open(button.href, "_blank"); 
         }
     });
 </script>
