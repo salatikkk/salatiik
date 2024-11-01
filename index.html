@@ -10,28 +10,88 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #e0cce4; /* Едва фиолетовый фон */
+            background-color: #e0cce4;
             margin: 0;
             font-family: Arial, sans-serif;
+            overflow: hidden; /* чтобы кнопка не выходила за границы */
+            position: relative;
         }
         .button {
-            background-color: #2e8b57; /* Немного тёмно-зелёная кнопка */
+            background-color: #2e8b57;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            font-size: 14px; /* Чуть меньше среднего размера */
+            font-size: 14px;
             cursor: pointer;
             text-decoration: none;
+            position: absolute; /* позволяет кнопке двигаться по всему экрану */
         }
-        .button:hover {
-            background-color: #3a9f6b; /* Светлее при наведении */
+        .counter {
+            position: absolute;
+            bottom: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+        .note {
+            position: absolute;
+            top: 10px;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.3); /* полупрозрачный текст */
         }
     </style>
 </head>
 <body>
 
-<a href="https://t.me/salat_gptbot" target="_blank" class="button">SALAT</a>
+<div class="note">не тикай</div>
+<a href="https://t.me/salat_gptbot" target="_blank" class="button" id="telegramButton">SALAT</a>
+<div class="counter" id="counter">0</div>
+
+<script>
+    const button = document.getElementById("telegramButton");
+    const counterDisplay = document.getElementById("counter");
+    let clickCount = 0;
+    let bounceCount = 0;
+    let posX = Math.random() * window.innerWidth;
+    let posY = Math.random() * window.innerHeight;
+    let velocityX = 2 + Math.random() * 3; // случайная начальная скорость по X
+    let velocityY = 2 + Math.random() * 3; // случайная начальная скорость по Y
+
+    function moveButton() {
+        posX += velocityX;
+        posY += velocityY;
+
+        // Проверка столкновения с границами
+        if (posX <= 0 || posX >= window.innerWidth - button.offsetWidth) {
+            velocityX = -velocityX;
+            bounceCount++;
+        }
+        if (posY <= 0 || posY >= window.innerHeight - button.offsetHeight) {
+            velocityY = -velocityY;
+            bounceCount++;
+        }
+
+        // Обновляем позицию кнопки
+        button.style.left = posX + "px";
+        button.style.top = posY + "px";
+
+        // Обновляем счётчик отскоков
+        counterDisplay.textContent = bounceCount;
+
+        requestAnimationFrame(moveButton);
+    }
+
+    button.addEventListener("click", (event) => {
+        event.preventDefault(); // предотвращаем переход по ссылке сразу
+        clickCount++;
+
+        if (clickCount === 1) {
+            moveButton(); // запускаем анимацию при первом клике
+        } else if (clickCount === 2) {
+            window.open(button.href, "_blank"); // при втором нажатии переходим на ссылку
+        }
+    });
+</script>
 
 </body>
 </html>
