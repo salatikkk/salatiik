@@ -26,10 +26,10 @@
             cursor: pointer;
             text-decoration: none;
             position: absolute; /* Позволяет кнопке двигаться по всему экрану */
-            transition: background-color 0.2s; /* Плавный переход цвета фона */
+            transition: background-color 0.1s; /* Ускоренный переход цвета фона */
         }
         .button.bounce {
-            animation: bounce 0.5s; /* Применение анимации при столкновении */
+            animation: bounce 0.3s; /* Укороченная анимация при столкновении */
         }
         @keyframes bounce {
             0% { background-color: #2e8b57; }
@@ -84,14 +84,14 @@
             bounceCount++;
             button.classList.add("bounce"); // Добавляем класс для анимации
             vibrate(); // Вызываем вибрацию
-            setTimeout(() => button.classList.remove("bounce"), 500); // Удаляем класс после 500 мс
+            setTimeout(() => button.classList.remove("bounce"), 300); // Удаляем класс после 300 мс
         }
         if (posY <= 0 || posY >= window.innerHeight - button.offsetHeight) {
             velocityY = -velocityY;
             bounceCount++;
             button.classList.add("bounce"); // Добавляем класс для анимации
             vibrate(); // Вызываем вибрацию
-            setTimeout(() => button.classList.remove("bounce"), 500); // Удаляем класс после 500 мс
+            setTimeout(() => button.classList.remove("bounce"), 300); // Удаляем класс после 300 мс
         }
 
         // Обновляем позицию кнопки
